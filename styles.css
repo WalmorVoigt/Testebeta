@@ -1,0 +1,113 @@
+/* Adicione no início do arquivo, após as variáveis :root */
+html {
+  font-size: 100%; /* Garante melhor escalabilidade para zoom do usuário */
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Melhorias no contraste para acessibilidade */
+.level-btn {
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Melhor feedback visual para botões desativados */
+.level-btn:disabled,
+.next-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.level-btn:disabled::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Melhorias no feedback das opções */
+.option-btn.correct {
+  box-shadow: 0 0 0 2px var(--success);
+}
+
+.option-btn.incorrect {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* Adicione isto para melhorar a visibilidade do feedback */
+.feedback {
+  background: var(--bg-secondary);
+  border-left: 4px solid var(--secondary);
+  padding: var(--space-md);
+  margin: var(--space-md) 0;
+}
+
+.feedback.correct {
+  border-left-color: var(--success);
+}
+
+.feedback.incorrect {
+  border-left-color: var(--accent);
+}
+
+/* Melhorias na responsividade */
+@media (max-width: 480px) {
+  .options {
+    grid-template-columns: 1fr;
+  }
+  
+  .level-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Adicione para melhorar o foco visual */
+:focus-visible {
+  outline: 3px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+/* Melhorias no tema escuro */
+[data-theme="dark"] {
+  --level1: #2980b9;
+  --level2: #27ae60;
+  --level3: #f39c12;
+  --level4: #c0392b;
+  --level5: #8e44ad;
+}
+
+/* Adicione para o botão de próximo nível desbloqueado */
+.next-level-btn.unlocked {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Melhorias no contraste para texto */
+.subtitle, .question-counter, .stat-label {
+  color: var(--text-secondary);
+  opacity: 0.9;
+}
+
+/* Garantir que o container principal tenha altura mínima */
+.container {
+  min-height: calc(100vh - 2 * var(--space-md));
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}

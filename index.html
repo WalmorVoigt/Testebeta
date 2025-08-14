@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jogo Bíblico - Teste seu conhecimento da Palavra de Deus com 100 perguntas em 5 níveis de dificuldade">
+  <meta name="keywords" content="jogo bíblico, perguntas bíblicas, quiz cristão, conhecimento bíblico">
+  <meta name="author" content="WALMOR.V">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jogo Bíblico - Teste seu Conhecimento">
+  <meta property="og:description" content="100 perguntas bíblicas em 5 níveis de dificuldade">
+  <meta property="og:url" content="">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Jogo Bíblico - Teste seu Conhecimento">
+  <meta property="twitter:description" content="100 perguntas bíblicas em 5 níveis de dificuldade">
+  
+  <title>Jogo Bíblico - Teste seu Conhecimento da Palavra de Deus</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Skip to main content for accessibility -->
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+  
+  <div class="container">
+    <header>
+      <h1>🙏 Jogo Bíblico</h1>
+      <p class="subtitle">Teste seu conhecimento da Palavra de Deus</p>
+      <div class="theme-toggle">
+        <button id="themeToggle" class="theme-btn" aria-label="Alternar tema escuro/claro">
+          🌙
+        </button>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <!-- Tela de seleção de níveis -->
+      <section class="level-selection" id="levelSelection" aria-label="Seleção de níveis">
+        <h2 class="sr-only">Escolha seu nível</h2>
+        <div class="level-grid">
+          <button class="level-btn level-1" onclick="startGame(1)" aria-label="Nível 1 - Básico">
+            <span class="level-number">1</span>
+            <span class="level-name">Básico</span>
+          </button>
+          <button class="level-btn level-2" id="level2Btn" onclick="checkLevel(2)" disabled aria-label="Nível 2 - Intermediário (Bloqueado)">
+            <span class="level-number">2</span>
+            <span class="level-name">Intermediário</span>
+            <span class="lock-icon">🔒</span>
+          </button>
+          <button class="level-btn level-3" id="level3Btn" onclick="checkLevel(3)" disabled aria-label="Nível 3 - Avançado (Bloqueado)">
+            <span class="level-number">3</span>
+            <span class="level-name">Avançado</span>
+            <span class="lock-icon">🔒</span>
+          </button>
+          <button class="level-btn level-4" id="level4Btn" onclick="checkLevel(4)" disabled aria-label="Nível 4 - Expert (Bloqueado)">
+            <span class="level-number">4</span>
+            <span class="level-name">Expert</span>
+            <span class="lock-icon">🔒</span>
+          </button>
+          <button class="level-btn level-5" id="level5Btn" onclick="checkLevel(5)" disabled aria-label="Nível 5 - Mestre (Bloqueado)">
+            <span class="level-number">5</span>
+            <span class="level-name">Mestre</span>
+            <span class="lock-icon">🔒</span>
+          </button>
+        </div>
+        <div id="lockedMessage" class="locked-message" role="alert" aria-live="polite">
+          Complete o nível anterior com 100% para desbloquear este nível
+        </div>
+      </section>
+
+      <!-- Tela do quiz -->
+      <section class="quiz-container" id="quizContainer" aria-label="Quiz bíblico">
+        <div class="quiz-header">
+          <div class="level-indicator" id="levelIndicator">Nível 1</div>
+          <button class="home-btn-small" onclick="goHome()" aria-label="Voltar ao início">🏠</button>
+        </div>
+        
+        <div class="progress-container" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar" id="progressBar"></div>
+          <span class="progress-text" id="progressText">0/20</span>
+        </div>
+        
+        <div class="score-display" id="scoreDisplay" aria-live="polite">
+          <span class="score-label">Pontuação:</span>
+          <span class="score-value">0</span>
+        </div>
+        
+        <div class="question-container">
+          <h2 class="question" id="question"></h2>
+          <div class="question-counter" id="questionCounter" aria-live="polite"></div>
+        </div>
+        
+        <div class="options" id="options" role="group" aria-label="Opções de resposta"></div>
+        
+        <div class="feedback" id="feedback" role="alert" aria-live="polite"></div>
+        
+        <div class="quiz-actions">
+          <button class="next-btn" id="nextBtn" onclick="nextQuestion()" disabled>
+            Próxima Pergunta
+          </button>
+        </div>
+      </section>
+
+      <!-- Tela de resultados -->
+      <section class="result-container" id="resultContainer" aria-label="Resultados do quiz">
+        <div class="result-icon" id="resultIcon"></div>
+        <h2 class="result-title" id="resultTitle"></h2>
+        <div class="result-score" id="resultScore"></div>
+        <p class="result-message" id="resultMessage"></p>
+        
+        <div class="result-stats" id="resultStats">
+          <div class="stat-item">
+            <span class="stat-value" id="correctAnswers">0</span>
+            <span class="stat-label">Acertos</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="totalQuestions">0</span>
+            <span class="stat-label">Total</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="accuracyPercentage">0%</span>
+            <span class="stat-label">Precisão</span>
+          </div>
+        </div>
+        
+        <div class="result-actions">
+          <button class="action-btn home-btn" onclick="goHome()">
+            🏠 Voltar ao Início
+          </button>
+          <button class="action-btn retry-btn" onclick="retryLevel()">
+            🔄 Tentar Novamente
+          </button>
+          <button class="action-btn next-level-btn" id="nextLevelBtn" onclick="startNextLevel()">
+            ⭐ Próximo Nível
+          </button>
+          <button class="action-btn share-btn" onclick="shareResult()">
+            📤 Compartilhar
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Desenvolvido por <strong>WALMOR.V</strong> | 100 Perguntas Bíblicas</p>
+      <p class="version">Versão 2.0 - Melhorada</p>
+    </footer>
+  </div>
+
+  <!-- Loading indicator -->
+  <div class="loading" id="loading" aria-hidden="true">
+    <div class="loading-spinner"></div>
+    <p>Carregando perguntas...</p>
+  </div>
+
+  <!-- Toast notifications -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <script src="data.js"></script>
+  <script src="game.js"></script>
+  <script src="ui.js"></script>
+</body>
+</html>
