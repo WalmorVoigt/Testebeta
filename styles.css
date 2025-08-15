@@ -587,3 +587,16 @@ footer strong {
     gap: var(--space-md);
   }
 }
+/* Adicione no final do arquivo styles.css */
+.level-selection {
+  display: block !important;
+}
+
+.quiz-container, 
+.result-container {
+  display: none !important;
+}
+
+#levelSelection {
+  display: block;
+}

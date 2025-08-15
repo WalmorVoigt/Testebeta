@@ -467,11 +467,33 @@ document.addEventListener('DOMContentLoaded', () => {
   window.game = new BiblicalGame();
 });
 
-// Funções globais para chamadas do HTML
-function startGame(level) { window.game?.startGame(level); }
-function checkLevel(level) { window.game?.checkLevel(level); }
-function nextQuestion() { window.game?.nextQuestion(); }
-function goHome() { window.game?.goHome(); }
-function retryLevel() { window.game?.retryLevel(); }
-function startNextLevel() { window.game?.startNextLevel(); }
-function shareResult() { window.game?.shareResult(); }
+// DEFINA AS FUNÇÕES GLOBAIS PRIMEIRO
+window.startGame = function(level) { 
+  if (window.game) window.game.startGame(level);
+}
+
+window.checkLevel = function(level) { 
+  if (window.game) window.game.checkLevel(level);
+}
+
+window.nextQuestion = function() { 
+  if (window.game) window.game.nextQuestion();
+}
+
+window.goHome = function() { 
+  if (window.game) window.game.goHome();
+}
+
+window.retryLevel = function() { 
+  if (window.game) window.game.retryLevel();
+}
+
+window.startNextLevel = function() { 
+  if (window.game) window.game.startNextLevel();
+}
+
+window.shareResult = function() { 
+  if (window.game) window.game.shareResult();
+}
+
+// A classe BiblicalGame continua aqui...
