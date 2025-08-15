@@ -22,6 +22,23 @@ body {
   cursor: not-allowed;
   position: relative;
 }
+/* Garante que as telas de quiz e resultado comecem escondidas */
+.quiz-container,
+.result-container {
+  display: none;
+}
+
+/* Garante que o loading e as mensagens comecem escondidos */
+.loading,
+.toast-container {
+  display: none;
+}
+
+/* Estilo para quando o loading estiver ativo */
+.loading {
+  position: fixed;
+  /* ... outros estilos de loading */
+}
 
 .level-btn:disabled::after {
   content: "";
