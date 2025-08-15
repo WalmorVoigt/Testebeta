@@ -1,6 +1,17 @@
 // Lógica principal do jogo
 class BiblicalGame {
   constructor() {
+    // ... código existente
+
+    // Adicione esta verificação
+    if (typeof getLevelQuestions === 'undefined') {
+      console.error('Função getLevelQuestions não está definida!');
+      this.showToast('Erro crítico: Recarregue a página', 'error');
+    }
+  }
+}
+class BiblicalGame {
+  constructor() {
     this.currentLevel = 1;
     this.currentQuestionIndex = 0;
     this.score = 0;

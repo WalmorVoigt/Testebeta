@@ -1,5 +1,14 @@
 
-// ui.js
+// ui.js - Adicione no INÍCIO do arquivo
+window.startGame = function(level) { 
+  if (window.game) window.game.startGame(level);
+}
+
+window.checkLevel = function(level) { 
+  if (window.game) window.game.checkLevel(level);
+}
+
+// ... demais funções globais (manter as que já existem)
 // Script de interface para o Jogo Bíblico
 
 console.log("UI.js carregado com sucesso.");

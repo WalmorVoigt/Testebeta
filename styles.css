@@ -1,4 +1,12 @@
 /* styles.css completo */
+#levelSelection {
+  display: block;
+}
+
+.quiz-container, 
+.result-container {
+  display: none;
+}
 :root {
   /* Cores base (tema claro) */
   --primary: #3498db;
@@ -586,17 +594,4 @@ footer strong {
     flex-direction: column;
     gap: var(--space-md);
   }
-}
-/* Adicione no final do arquivo styles.css */
-.level-selection {
-  display: block !important;
-}
-
-.quiz-container, 
-.result-container {
-  display: none !important;
-}
-
-#levelSelection {
-  display: block;
 }
